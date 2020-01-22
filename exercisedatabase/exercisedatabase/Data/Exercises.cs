@@ -9,12 +9,26 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Newtonsoft.Json;
 
 namespace exercisedatabase.Data
 {
+    
     public partial class Exercises
     {
-        public string title { get; set; }
-        public string description { get; set; }
+        public long Count { get; set; }
+        public object Next { get; set; }
+        public object Previous { get; set; }
+        public List<ExercisesDetails> Results { get;set; }
+
+
+    }
+    public partial class ExercisesDetails
+    {
+        
+        public string Name { get; set; }
+        
+        public string Category { get; set; }
+        
     }
 }

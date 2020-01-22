@@ -4,17 +4,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
-        android:text="Title"
+        android:text="Name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minWidth="25px"
         android:minHeight="25px"
         android:textSize="48px"
-        android:id="@+id/textView1"/>
+        android:id="@+id/name"/>
     <TextView
         android:text="Description"
+        android:textSize="30px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/descriptionTextView" />
+    <TextView
+        android:text="Category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/categorytextView" />
+    <TextView
+        android:text="Muscles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/musclestextView" />
+    <TextView
+        android:text="Equipment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/equipmenttextView" />
 
 </LinearLayout>

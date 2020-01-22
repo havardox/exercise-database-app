@@ -19,15 +19,23 @@ namespace exercisedatabase
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+
             SetContentView(Resource.Layout.exerciselayout);
+            var name = FindViewById<TextView>(Resource.Id.name);
+            var description = FindViewById<TextView>(Resource.Id.descriptionTextView);
+            var category = FindViewById<TextView>(Resource.Id.categorytextView);
+            var muscles = FindViewById<TextView>(Resource.Id.musclestextView);
+            var equipment = FindViewById<TextView>(Resource.Id.equipmenttextView);
+           
 
-            var exerciseTitle = FindViewById<TextView>(Resource.Id.textView1);
-            var exerciseDesc = FindViewById<TextView>(Resource.Id.descriptionTextView);
+            var exercises = JsonConvert.DeserializeObject<Data.Details>(Intent.GetStringExtra("exercises"));
 
-            var exercises = JsonConvert.DeserializeObject<Data.Exercises>(Intent.GetStringExtra("exercises"));
-
-            exerciseTitle.Text = exercises.title;
-            exerciseDesc.Text = exercises.description;
+            name.Text = "Name: " + exercises.Name;
+            description.Text = "Description: " + exercises.Description;
+            category.Text = "Category: " + exercises.Category;
+            muscles.Text = "Muscles: " + exercises.Muscles;
+            equipment.Text = "Equipment: " + exercises.Equipment;
+            
            
         }
     }
