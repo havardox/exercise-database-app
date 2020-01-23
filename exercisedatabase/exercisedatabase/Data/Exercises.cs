@@ -21,13 +21,14 @@ namespace exercisedatabase.Data
         public object Previous { get; set; }
         public List<ExercisesDetails> Results { get;set; }
 
+        public object Classifications { get; set; }
 
     }
     public partial class ExercisesDetails
     {
         
         public string Name { get; set; }
-        
+        public string Utility { get; set; }
         
         
     }

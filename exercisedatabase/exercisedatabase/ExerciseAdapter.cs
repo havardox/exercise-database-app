@@ -44,7 +44,7 @@ namespace exercisedatabase
                 view = _context.LayoutInflater.Inflate(Resource.Layout.exercise_row_layout, null);
 
             view.FindViewById<TextView>(Resource.Id.name).Text = item.Name;
-            
+            view.FindViewById<TextView>(Resource.Id.utility).Text = item.Utility;
 
 
             return view;
