@@ -25,7 +25,7 @@ namespace exercisedatabase
             var searchBtn = FindViewById<Button>(Resource.Id.searchButton);
             var exerciseListView = FindViewById<ListView>(Resource.Id.exerciseListView);
 
-            string queryString = "https://wger.de/api/v2/exercise/";
+            string queryString = "https://erikyy.github.io/api/exrx2.json";
             var data = await ExerciseDataService.GetExercises(queryString);
             exerciseListView.Adapter = new ExerciseAdapter(this, data.Results);
                 
