@@ -15,17 +15,17 @@ namespace exercisedatabase
 {
     class ExerciseAdapter : BaseAdapter<ExercisesDetails>
     {
-        List<ExercisesDetails> _items;
-        Activity _context;
+        private List<ExercisesDetails> items;
+        private Activity context;
 
         public ExerciseAdapter(Activity context, List<ExercisesDetails> items) : base()
         {
-            this._context = context;
-            this._items = items;
+            this.context = context;
+            this.items = items;
         }
         public override ExercisesDetails this[int position]
         {
-            get { return _items[position]; }
+            get { return items[position]; }
         }
 
 
@@ -37,14 +37,14 @@ namespace exercisedatabase
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            var item = _items[position];
-            var view = convertView;
+            var item = items[position];
+            View view = convertView;
 
             if (view == null)
-                view = _context.LayoutInflater.Inflate(Resource.Layout.exercise_row_layout, null);
+                view = context.LayoutInflater.Inflate(Resource.Layout.exercise_row_layout, parent, false);
 
             view.FindViewById<TextView>(Resource.Id.name).Text = item.Name;
-            view.FindViewById<TextView>(Resource.Id.utility).Text = item.Classification.Utility;
+            view.FindViewById<TextView>(Resource.Id.utility).Text = item.classification.utility;
 
 
             return view;
@@ -55,10 +55,11 @@ namespace exercisedatabase
         {
             get
             {
-                return _items.Count;
+                return items.Count;
             }
         }
 
+        
     }
 
     

@@ -17,15 +17,15 @@ namespace exercisedatabase
 {
     public class ExerciseDataService
     {
-        public static async Task<Exercises>GetExercises(string queryString)
+        public static async Task<ExercisesList>GetExercises(string queryString)
         {
             HttpClient client = new HttpClient();
             var response = await client.GetStringAsync(queryString);
 
-            Exercises data = null;
+           
             if(response != null)
             {
-                data = JsonConvert.DeserializeObject<Exercises>(response);
+                ExercisesList data = JsonConvert.DeserializeObject<ExercisesList>(response);
                 return data;
             }
             return null;

@@ -9,6 +9,7 @@ using exercisedatabase.Data;
 using System.Collections.ObjectModel;
 using static Android.Widget.AdapterView;
 using Android.Content;
+using System.Collections.Generic;
 
 namespace exercisedatabase
 {
@@ -24,24 +25,24 @@ namespace exercisedatabase
             var searchText = FindViewById<EditText>(Resource.Id.searchText);
             var searchBtn = FindViewById<Button>(Resource.Id.searchButton);
             var exerciseListView = FindViewById<ListView>(Resource.Id.exerciseListView);
-
+            
             string queryString = "https://erikyy.github.io/api/exrx2.json";
             var data = await ExerciseDataService.GetExercises(queryString);
             exerciseListView.Adapter = new ExerciseAdapter(this, data.Results);
                 
-            searchBtn.Click += async delegate
+            searchBtn.Click += delegate
             {
                 string searchWord = searchText.Text;
                 //to be implemented as current api does not contain search function
             };
-            exerciseListView.ItemClick += (object sender, ItemClickEventArgs e) =>
-            {
-                var exerciseDetails = data.Results[e.Position];
-                var intent = new Intent(this, typeof(Details_Activity));
-                intent.PutExtra("exerciseDetails", JsonConvert.SerializeObject(exerciseDetails));
-                StartActivity(intent);
+          //  exerciseListView.ItemClick += (object sender, ItemClickEventArgs e) =>
+          //  {
+          //      var exerciseDetails = data.Results[e.Position];
+          //      var intent = new Intent(this, typeof(Details_Activity));
+          //      intent.PutExtra("exerciseDetails", JsonConvert.SerializeObject(exerciseDetails));
+          //      StartActivity(intent);
 
-            };
+          //  };
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
