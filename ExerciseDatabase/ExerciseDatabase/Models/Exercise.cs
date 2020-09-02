@@ -28,8 +28,8 @@ namespace ExerciseDatabase.Models
         public string utility { get; set; }
         public string mechanics { get; set; }
         public string force { get; set; }
-        public string bearing { get; set; }
-        public string impact { get; set; }
+        public object bearing { get; set; }
+        public object impact { get; set; }
     }
 
     public class Instructions
@@ -40,11 +40,11 @@ namespace ExerciseDatabase.Models
 
     public class Muscles
     {
-        public string target { get; set; }
-        public string synergists { get; set; }
-        public string dynamicStabilizers { get; set; }
-        public string stabilizers { get; set; }
-        public string antogonistStabilizers { get; set; }
+        public object target { get; set; }
+        public object synergists { get; set; }
+        public object dynamicStabilizers { get; set; }
+        public object stabilizers { get; set; }
+        public object antogonistStabilizers { get; set; }
     }
 
     

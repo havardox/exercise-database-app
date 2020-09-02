@@ -61,13 +61,7 @@ namespace ExerciseDatabase
                     intent.PutExtra("utility", exercisedetail.classification.utility);
                     intent.PutExtra("force", exercisedetail.classification.force);
                     intent.PutExtra("mechanics", exercisedetail.classification.mechanics);
-                    intent.PutExtra("bearing", exercisedetail.classification.bearing);
-                    intent.PutExtra("impact", exercisedetail.classification.impact);
-                    intent.PutExtra("target", exercisedetail.muscles.target);
-                    intent.PutExtra("synergists", exercisedetail.muscles.synergists);
-                    intent.PutExtra("stabilizers", exercisedetail.muscles.stabilizers);
-                    intent.PutExtra("dynamicstabilizers", exercisedetail.muscles.dynamicStabilizers);
-                    intent.PutExtra("antagoniststabilizers", exercisedetail.muscles.antogonistStabilizers);
+                    
                     intent.PutExtra("comments", exercisedetail.comments);
                     intent.PutExtra("pageurl", exercisedetail.pageUrl);
                     StartActivity(intent);
