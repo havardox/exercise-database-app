@@ -28,7 +28,7 @@ namespace ExerciseDatabase
 
 
             btn_get_data = FindViewById<Button>(Resource.Id.get_data);
-            listView = FindViewById<ListView>(Resource.Id.get_data);
+            listView = FindViewById<ListView>(Resource.Id.exerciselist);
 
 
             apiInterface = RestService.For<ApiInterface>("https://erikyy.github.io");
@@ -37,13 +37,7 @@ namespace ExerciseDatabase
              {
                  try
                  {
-                     Android.Support.V7.App.AlertDialog dialog = new EDMTDialogBuilder()
-                     .SetContext(this)
-                     .SetMessage("Please wait...")
-                     .Build();
-
-                     if (!dialog.IsShowing)
-                         dialog.Show();
+                    
 
                      List<Exercise> exercises = await apiInterface.GetExercises();
                      List<string> name = new List<string>();
@@ -56,8 +50,7 @@ namespace ExerciseDatabase
                          Android.Resource.Layout.SimpleListItem1, name);
                      listView.Adapter = adapter;
 
-                     if (dialog.IsShowing)
-                         dialog.Dismiss();
+                     
 
 
                  }
