@@ -9,56 +9,61 @@ using EDMTDialog;
 using System.Collections.Generic;
 using ExerciseDatabase.Models;
 using System;
+using static Android.Widget.AdapterView;
 
 namespace ExerciseDatabase
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
-        Button btn_get_data;
+        
         ListView listView;
         ApiInterface apiInterface;
 
 
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected async override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             SetContentView(Resource.Layout.activity_main);
 
 
-            btn_get_data = FindViewById<Button>(Resource.Id.get_data);
+            
             listView = FindViewById<ListView>(Resource.Id.exerciselist);
 
-
+            
             apiInterface = RestService.For<ApiInterface>("https://erikyy.github.io");
 
-            btn_get_data.Click += async delegate
+            List<Exercise> exercises = await apiInterface.GetExercises();
+            List<string> name = new List<string>();
+
+            
+             try
              {
-                 try
-                 {
                     
+             foreach(var exercise in exercises)
+                   {
+                       name.Add(exercise.name);
+                   }
+              var adapter = new ArrayAdapter<string>(this,
+              Android.Resource.Layout.SimpleListItem1, name);
+              listView.Adapter = adapter;
+                listView.ItemClick += (object sender, ItemClickEventArgs e) =>
+                {
+                    var exercisedetail = exercises[e.Position];
+                    Toast.MakeText(this, exercisedetail.name, ToastLength.Short).Show();
+                   
 
-                     List<Exercise> exercises = await apiInterface.GetExercises();
-                     List<string> name = new List<string>();
+                };
 
-                     foreach(var exercise in exercises)
-                     {
-                         name.Add(exercise.name);
-                     }
-                     var adapter = new ArrayAdapter<string>(this,
-                         Android.Resource.Layout.SimpleListItem1, name);
-                     listView.Adapter = adapter;
-
-                     
-
-
-                 }
-                 catch(Exception e)
-                 {
+            }
+             catch(Exception e)
+             {
                      Toast.MakeText(this, "" + e.Message, ToastLength.Long).Show();
-                 }
-             };
+             }
+            
+
+            
 
             
         }
