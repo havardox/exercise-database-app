@@ -1,37 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:text="Search exercises"
+    <ListView
+        android:id="@+id/exerciselist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    </ListView>
+    <Button
+        android:id="@+id/get_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:textSize="29px"
-        android:id="@+id/textView1" />
-    <EditText
-        android:layout_marginTop="20px"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"       
-        android:id="@+id/searchText" />
-    <Button       
-        android:layout_marginTop="110px"
-        android:layout_marginLeft="230px"
-        android:text="Search"
-        android:layout_width="290px"
-        android:layout_height="wrap_content"       
-        android:id="@+id/searchButton" />
-    <ListView
-        android:layout_marginTop="190px"
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"       
-        android:id="@+id/exerciseListView" />
-    
-   
+        android:layout_alignParentBottom="true"
+        android:text="Get Data"
+        >
+        
+    </Button>
 </RelativeLayout>

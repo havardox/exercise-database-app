@@ -3,46 +3,71 @@ using Android.OS;
 using Android.Support.V7.App;
 using Android.Runtime;
 using Android.Widget;
-using System.IO;
-using Newtonsoft.Json;
-using exercisedatabase.Data;
-using System.Collections.ObjectModel;
-using static Android.Widget.AdapterView;
-using Android.Content;
+using ExerciseDatabase.Interface;
+using Refit;
+using EDMTDialog;
 using System.Collections.Generic;
+using ExerciseDatabase.Models;
+using System;
 
-namespace exercisedatabase
+namespace ExerciseDatabase
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
-        protected async override void OnCreate(Bundle savedInstanceState)
+        Button btn_get_data;
+        ListView listView;
+        ApiInterface apiInterface;
+
+
+        protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
-            var searchText = FindViewById<EditText>(Resource.Id.searchText);
-            var searchBtn = FindViewById<Button>(Resource.Id.searchButton);
-            var exerciseListView = FindViewById<ListView>(Resource.Id.exerciseListView);
-            
-            string queryString = "https://erikyy.github.io/api/exrx2.json";
-            var data = await ExerciseDataService.GetExercises(queryString);
-            exerciseListView.Adapter = new ExerciseAdapter(this, data.Results);
-                
-            searchBtn.Click += delegate
-            {
-                string searchWord = searchText.Text;
-                //to be implemented as current api does not contain search function
-            };
-          //  exerciseListView.ItemClick += (object sender, ItemClickEventArgs e) =>
-          //  {
-          //      var exerciseDetails = data.Results[e.Position];
-          //      var intent = new Intent(this, typeof(Details_Activity));
-          //      intent.PutExtra("exerciseDetails", JsonConvert.SerializeObject(exerciseDetails));
-          //      StartActivity(intent);
 
-          //  };
+
+            btn_get_data = FindViewById<Button>(Resource.Id.get_data);
+            listView = FindViewById<ListView>(Resource.Id.get_data);
+
+
+            apiInterface = RestService.For<ApiInterface>("https://erikyy.github.io");
+
+            btn_get_data.Click += async delegate
+             {
+                 try
+                 {
+                     Android.Support.V7.App.AlertDialog dialog = new EDMTDialogBuilder()
+                     .SetContext(this)
+                     .SetMessage("Please wait...")
+                     .Build();
+
+                     if (!dialog.IsShowing)
+                         dialog.Show();
+
+                     List<Exercise> exercises = await apiInterface.GetExercises();
+                     List<string> name = new List<string>();
+
+                     foreach(var exercise in exercises)
+                     {
+                         name.Add(exercise.name);
+                     }
+                     var adapter = new ArrayAdapter<string>(this,
+                         Android.Resource.Layout.SimpleListItem1, name);
+                     listView.Adapter = adapter;
+
+                     if (dialog.IsShowing)
+                         dialog.Dismiss();
+
+
+                 }
+                 catch(Exception e)
+                 {
+                     Toast.MakeText(this, "" + e.Message, ToastLength.Long).Show();
+                 }
+             };
+
+            
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
